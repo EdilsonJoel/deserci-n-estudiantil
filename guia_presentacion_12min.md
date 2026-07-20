@@ -220,7 +220,7 @@
 
 **Habla:** «Pero ojo, esto tiene limitaciones importantes».
 
-1. **«Los datos son de Portugal, no de Argentina. Los patrones pueden ser distintos en nuestro contexto».**
+1. **«Los datos son de Portugal, no de Perú. Los patrones pueden ser distintos en nuestro contexto».**
 2. **«Solo usamos datos del primer año. No considera crisis económicas, cambios de política educativa o problemas personales que surjan después».**
 3. **«La variable objetivo es binaria: deserta o no deserta. No captura matices como abandono temporal, cambio de carrera, o si el estudiante vuelve después».**
 

@@ -860,7 +860,7 @@ html`<div style="
     .text("Limitaciones");
 
   const limitaciones = [
-    "Los datos provienen de una universidad europea (UCI Dataset), por lo que los patrones pueden no replicarse exactamente en el contexto argentino.",
+    "Los datos provienen de una universidad europea (UCI Dataset), por lo que los patrones pueden no replicarse exactamente en el contexto peruano.",
     "El modelo usa datos del primer año. No considera factores externos como cambios de política educativa o crisis económicas durante la carrera.",
     "La variable objetivo es binaria (deserta/no deserta). No distingue entre abandono temporal, cambio de carrera o graduación exitosa."
   ];
