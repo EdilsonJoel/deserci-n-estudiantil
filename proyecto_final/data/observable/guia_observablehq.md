@@ -648,6 +648,76 @@ Inputs.table(metricas_modelos, {
 }
 ```
 
+#### Celda 15b (JS — Interpretación de la matriz)
+```javascript
+{
+  const tn = matriz_confusion.find(d => d.prediccion === "0 (Estable)" && d.real === "0 (Estable)").cantidad;
+  const tp = matriz_confusion.find(d => d.prediccion === "1 (Deserción)" && d.real === "1 (Deserción)").cantidad;
+  const fn = matriz_confusion.find(d => d.prediccion === "0 (Estable)" && d.real === "1 (Deserción)").cantidad;
+  const fp = matriz_confusion.find(d => d.prediccion === "1 (Deserción)" && d.real === "0 (Estable)").cantidad;
+  const total = tn + tp + fn + fp;
+
+  const datos = [
+    {label: "Aciertos", valor: (tp + tn).toLocaleString(), pct: ((tp + tn) / total * 100).toFixed(1), color: "#16a34a", desc: "Estables y deserciones correctamente clasificados"},
+    {label: "Falsos Negativos", valor: fn.toLocaleString(), pct: (fn / total * 100).toFixed(1), color: "#dc2626", desc: "Deserciones no detectadas — costo muy alto (estudiante abandona sin apoyo)"},
+    {label: "Falsos Positivos", valor: fp.toLocaleString(), pct: (fp / total * 100).toFixed(1), color: "#d97706", desc: "Falsas alarmas — costo bajo (entrevista preventiva de tutoría)"}
+  ];
+
+  const container = d3.create("div")
+    .style("font-family", "system-ui, sans-serif")
+    .style("max-width", "500px")
+    .style("margin-top", "16px");
+
+  container.append("div")
+    .style("font-size", "13px")
+    .style("font-weight", "700")
+    .style("color", theme.slate)
+    .style("margin-bottom", "8px")
+    .text("Análisis de costos operativos");
+
+  const grid = container.append("div")
+    .style("display", "grid")
+    .style("grid-template-columns", "repeat(3, 1fr)")
+    .style("gap", "10px");
+
+  const card = grid.selectAll("div")
+    .data(datos)
+    .join("div")
+    .style("border", d => `2px solid ${d.color}`)
+    .style("border-radius", "8px")
+    .style("padding", "12px")
+    .style("text-align", "center");
+
+  card.append("div")
+    .style("font-size", "11px")
+    .style("font-weight", "700")
+    .style("color", theme.muted)
+    .style("text-transform", "uppercase")
+    .text(d => d.label);
+
+  card.append("div")
+    .style("font-size", "24px")
+    .style("font-weight", "800")
+    .style("color", d => d.color)
+    .style("margin", "4px 0")
+    .text(d => d.valor);
+
+  card.append("div")
+    .style("font-size", "11px")
+    .style("color", theme.slate)
+    .text(d => d.desc);
+
+  container.append("p")
+    .style("font-size", "13px")
+    .style("color", theme.muted)
+    .style("margin-top", "12px")
+    .style("max-width", "480px")
+    .text(`Sensibilidad (Recall): ${(tp / (tp + fn) * 100).toFixed(1)}% — el modelo detecta ${tp} de ${tp + fn} deserciones reales. Priorizamos Recall sobre Precision por el alto costo de no intervenir a tiempo.`);
+
+  return container.node();
+}
+```
+
 ---
 
 ### SIMULADOR
