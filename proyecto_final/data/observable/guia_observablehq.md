@@ -408,7 +408,7 @@ Plot.plot({
   title: "Edad vs Tasa de Aprobación — ¿Dónde se concentra la deserción?",
   x: {label: "Edad al matricularse"},
   y: {label: "Tasa de aprobación anual", domain: [0, 1]},
-  color: {legend: true, range: [theme.blue, theme.red]},
+  color: {legend: true, domain: [0, 1], range: [theme.blue, theme.red], tickFormat: d => d === 0 ? "Estable (0)" : "Deserción (1)"},
   opacity: 0.5,
   marks: [
     Plot.dot(scatter_data, {
