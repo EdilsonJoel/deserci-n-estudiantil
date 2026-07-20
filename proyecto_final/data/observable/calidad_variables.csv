@@ -1,0 +1,39 @@
+columna,dimension,metrica,valor,estado
+Student_ID,Completitud,Porcentaje de completitud,100.0,OK
+Marital status,Completitud,Porcentaje de completitud,100.0,OK
+Application mode,Completitud,Porcentaje de completitud,100.0,OK
+Application order,Completitud,Porcentaje de completitud,100.0,OK
+Course,Completitud,Porcentaje de completitud,100.0,OK
+Daytime/evening attendance,Completitud,Porcentaje de completitud,100.0,OK
+Previous qualification,Completitud,Porcentaje de completitud,100.0,OK
+Previous qualification (grade),Completitud,Porcentaje de completitud,100.0,OK
+Nacionality,Completitud,Porcentaje de completitud,100.0,OK
+Mother's qualification,Completitud,Porcentaje de completitud,100.0,OK
+Father's qualification,Completitud,Porcentaje de completitud,100.0,OK
+Mother's occupation,Completitud,Porcentaje de completitud,100.0,OK
+Father's occupation,Completitud,Porcentaje de completitud,100.0,OK
+Admission grade,Completitud,Porcentaje de completitud,100.0,OK
+Displaced,Completitud,Porcentaje de completitud,100.0,OK
+Educational special needs,Completitud,Porcentaje de completitud,100.0,OK
+Debtor,Completitud,Porcentaje de completitud,100.0,OK
+Tuition fees up to date,Completitud,Porcentaje de completitud,100.0,OK
+Gender,Completitud,Porcentaje de completitud,100.0,OK
+Scholarship holder,Completitud,Porcentaje de completitud,100.0,OK
+Age at enrollment,Completitud,Porcentaje de completitud,100.0,OK
+International,Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 1st sem (credited),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 1st sem (enrolled),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 1st sem (evaluations),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 1st sem (approved),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 1st sem (grade),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 1st sem (without evaluations),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 2nd sem (credited),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 2nd sem (enrolled),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 2nd sem (evaluations),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 2nd sem (approved),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 2nd sem (grade),Completitud,Porcentaje de completitud,100.0,OK
+Curricular units 2nd sem (without evaluations),Completitud,Porcentaje de completitud,100.0,OK
+Unemployment rate,Completitud,Porcentaje de completitud,100.0,OK
+Inflation rate,Completitud,Porcentaje de completitud,100.0,OK
+GDP,Completitud,Porcentaje de completitud,100.0,OK
+Target,Completitud,Porcentaje de completitud,100.0,OK

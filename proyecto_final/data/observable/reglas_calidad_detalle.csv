@@ -1,0 +1,8 @@
+dimension,regla,registros_evaluados,registros_incumplen,estado
+Unicidad,Clave Student_ID única,4424,0,OK
+Consistencia,Créditos aprobados <= matriculados Sem1,4424,0,OK
+Consistencia,Créditos aprobados <= matriculados Sem2,4424,0,OK
+Consistencia,"Notas en rango [0, 20]",4424,0,OK
+Consistencia,Edad de matrícula >= 16,4424,0,OK
+Validez,"Banderas binarias en [0, 1]",4424,0,OK
+Validez,"Target en [Dropout, Graduate, Enrolled]",4424,0,OK

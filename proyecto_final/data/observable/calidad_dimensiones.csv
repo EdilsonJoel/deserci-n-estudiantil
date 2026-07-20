@@ -1,0 +1,5 @@
+dimension,reglas_totales,reglas_aprobadas,registros_evaluados,total_incumplimientos,cumplimiento_pct
+Consistencia,4,4,4424,0,100.0
+Unicidad,1,1,4424,0,100.0
+Validez,2,2,4424,0,100.0
+Completitud,38,38,4424,0,100.0

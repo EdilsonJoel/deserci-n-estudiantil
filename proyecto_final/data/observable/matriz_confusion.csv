@@ -1,0 +1,5 @@
+prediccion,real,cantidad
+0 (Estable),0 (Estable),558
+0 (Estable),1 (Deserción),12
+1 (Deserción),0 (Estable),40
+1 (Deserción),1 (Deserción),275
