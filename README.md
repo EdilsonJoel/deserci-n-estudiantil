@@ -27,7 +27,15 @@ venv\Scripts\activate
 pip install -r proyecto_final/requirements.txt
 ```
 
-### 3. Ejecutar
+### 3. Registrar el kernel (solo para Notebook)
+
+```bash
+python -m ipykernel install --user --name edaunaj2026i --display-name "Python (EdaUnaj2026I)"
+```
+
+> Si no hacés este paso, al abrir el notebook te va a aparecer "Kernel not found". Es obligatorio.
+
+### 4. Ejecutar
 
 ```bash
 # Opción A — Notebook (recomendado)
