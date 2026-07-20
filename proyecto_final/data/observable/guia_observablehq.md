@@ -6,7 +6,7 @@
 
 ## 1. Archivos a subir (File Attachments)
 
-Sube estos 13 archivos desde `proyecto_final/data/observable/`:
+Sube estos 14 archivos desde `proyecto_final/data/observable/`:
 
 1. `metadata_proyecto.csv`
 2. `calidad_dimensiones.csv`
@@ -21,6 +21,7 @@ Sube estos 13 archivos desde `proyecto_final/data/observable/`:
 11. `predicciones_modelo.csv`
 12. `modelo_final.onnx`
 13. `modelo_web_config.json`
+14. `eda_scatter.csv`
 
 ---
 
@@ -128,7 +129,12 @@ async function predecir(inputsArray) {
 }
 ```
 
-#### Celda S15 (JS — Datos jerarquía para treemap)
+#### Celda S15 (JS — Datos scatter para EDA)
+```javascript
+scatter_data = FileAttachment("eda_scatter.csv").csv({typed: true})
+```
+
+#### Celda S16 (JS — Datos jerarquía para treemap)
 ```javascript
 hierarchy_data = {
   const root = {name: "UNAJ", children: []};
@@ -392,6 +398,27 @@ Plot.plot({
       fx: "Type",
       tip: true
     })
+  ]
+})
+```
+
+#### Celda 10b (JS — Scatterplot interactivo)
+```javascript
+Plot.plot({
+  title: "Edad vs Tasa de Aprobación — ¿Dónde se concentra la deserción?",
+  x: {label: "Edad al matricularse"},
+  y: {label: "Tasa de aprobación anual", domain: [0, 1]},
+  color: {legend: true, range: [theme.blue, theme.red]},
+  opacity: 0.5,
+  marks: [
+    Plot.dot(scatter_data, {
+      x: "Age at enrollment",
+      y: "tasa_aprobacion_ano",
+      fill: "Machine failure",
+      r: 3,
+      tip: true
+    }),
+    Plot.ruleY([0])
   ]
 })
 ```
@@ -729,6 +756,38 @@ html`<div style="
     .style("color", theme.slate)
     .text(d => d);
 
+  container.append("h3")
+    .style("margin-top", "24px")
+    .style("font-size", "18px")
+    .text("Recomendación");
+
+  container.append("p")
+    .style("font-size", "15px")
+    .style("color", theme.slate)
+    .style("max-width", "880px")
+    .text("Implementar un sistema de alertas tempranas que monitoree la tasa de aprobación del primer semestre. Los estudiantes con menos del 50% de materias aprobadas deberían recibir tutoría académica y evaluación financiera antes del segundo semestre.");
+
+  container.append("h3")
+    .style("margin-top", "24px")
+    .style("font-size", "18px")
+    .text("Limitaciones");
+
+  const limitaciones = [
+    "Los datos provienen de una universidad europea (UCI Dataset), por lo que los patrones pueden no replicarse exactamente en el contexto argentino.",
+    "El modelo usa datos del primer año. No considera factores externos como cambios de política educativa o crisis económicas durante la carrera.",
+    "La variable objetivo es binaria (deserta/no deserta). No distingue entre abandono temporal, cambio de carrera o graduación exitosa."
+  ];
+
+  const limList = container.append("ul")
+    .style("font-size", "14px")
+    .style("color", theme.muted);
+
+  limList.selectAll("li")
+    .data(limitaciones)
+    .join("li")
+    .style("margin", "6px 0")
+    .text(d => d);
+
   container.append("blockquote")
     .style("border-left", `5px solid ${theme.blue}`)
     .style("background", "#eff6ff")
@@ -736,7 +795,7 @@ html`<div style="
     .style("margin-top", "22px")
     .style("font-size", "15px")
     .style("color", "#1e3a5f")
-    .text("Demo académica con datos del dataset UCI Student Dropout. No reemplaza el criterio institucional.");
+    .text("Demo académica con datos del dataset UCI Student Dropout. El modelo es una herramienta de apoyo, no reemplaza el criterio institucional.");
 
   return container.node();
 }
