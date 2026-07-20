@@ -1,120 +1,124 @@
 # ¿Podemos detectar a tiempo qué estudiante va a abandonar la universidad?
 
-**Predicción de deserción estudiantil** — Proyecto final de Big Data
+**Predicción de deserción estudiantil** — Proyecto final de Big Data — UNAJ 2026
 
 ---
 
-## Descripción
+## ⚡ Cómo ejecutar todo (3 pasos)
 
-Este proyecto explora si los datos del primer año —notas, situación financiera y edad— permiten identificar estudiantes en riesgo de abandono antes de que sea tarde. Se construyó un pipeline completo de Machine Learning (desde la ingesta hasta la exportación a **ONNX**) y un **dashboard interactivo en ObservableHQ** que incluye un simulador en tiempo real.
-
-**Target:** `0` = Estable, `1` = Deserción
-
----
-
-## Estructura del repositorio
-
-```
-proyecto_final/
-├── data/
-│   ├── raw/                  # Datos originales (student_dropout.csv)
-│   ├── processed/            # Datos limpios y preparados
-│   └── observable/           # Archivos para el dashboard ObservableHQ
-│       ├── *.csv             # Datos de EDA, calidad, métricas
-│       ├── modelo_final.onnx # Modelo exportado a ONNX
-│       └── guia_observablehq.md  # Paso a paso para construir el notebook
-├── models/                   # Modelos entrenados (.joblib, .onnx)
-├── notebooks/
-│   └── 01_desercion_estudiantil.ipynb  # Notebook principal
-├── src/
-│   ├── pipeline.py           # Orquestación del pipeline completo
-│   ├── calidad.py            # Validación de calidad DAMA
-│   ├── preparacion.py        # Limpieza e ingeniería de features
-│   └── modelado.py           # Entrenamiento, evaluación, exportación ONNX
-├── reports/figures/          # (opcional — los gráficos finales van en Observable)
-└── requirements.txt          # Dependencias Python
-```
-
----
-
-## Configuración del entorno
-
-### Requisitos
-
-- Python 3.10 – 3.13
-- Git
-
-### Instalación
+### 1. Clonar y entrar
 
 ```bash
-# 1. Clonar el repositorio
 git clone https://github.com/EdilsonJoel/deserci-n-estudiantil.git
 cd deserci-n-estudiantil
+```
 
-# 2. Crear y activar entorno virtual
-python -m venv venv
+### 2. Crear entorno virtual e instalar
 
+```bash
 # Windows
+python -m venv venv
 venv\Scripts\activate
 
 # Linux / macOS
+# python3 -m venv venv
 # source venv/bin/activate
 
-# 3. Instalar dependencias
 pip install -r proyecto_final/requirements.txt
 ```
 
-### Ejecutar el notebook
+### 3. Ejecutar
 
 ```bash
+# Opción A — Notebook (recomendado)
 jupyter notebook proyecto_final/notebooks/01_desercion_estudiantil.ipynb
+
+# Opción B — Script directo
+python proyecto_final/src/pipeline.py
 ```
 
-El notebook está listo para ejecutarse de principio a fin: carga los datos, aplica calidad DAMA, entrena los modelos y exporta a ONNX.
+El pipeline completo: carga datos → valida calidad DAMA → crea features → entrena 4 modelos → exporta ONNX → genera todos los CSVs para el dashboard.
 
 ---
 
-## Dashboard ObservableHQ
+## 📁 Estructura del proyecto
 
-El notebook de Observable se construye siguiendo la guía en:
+```
+deserci-n-estudiantil/
+├── README.md
+├── .gitignore
+└── proyecto_final/
+    ├── data/
+    │   ├── raw/             # student_dropout.csv (UCI)
+    │   ├── processed/       # datos_limpios.csv, datos_preparados.csv
+    │   └── observable/      # 14 archivos para el dashboard ObservableHQ
+    ├── models/              # modelo_final.joblib, .onnx, metadata.json
+    ├── notebooks/
+    │   └── 01_desercion_estudiantil.ipynb   ← Notebook principal
+    ├── src/
+    │   ├── pipeline.py      # Orquestación completa
+    │   ├── calidad.py       # Validación DAMA (45 reglas)
+    │   ├── preparacion.py   # Feature engineering
+    │   └── modelado.py      # Entrenamiento + ONNX
+    └── requirements.txt
+```
+
+---
+
+## 📊 Dashboard en ObservableHQ
+
+El notebook de Observable se construye manualmente siguiendo:
 
 ```
 proyecto_final/data/observable/guia_observablehq.md
 ```
 
-Incluye:
+Incluye: portada profesional, calidad DAMA 100%, selector interactivo, scatterplot, treemap, matriz de confusión, simulador ONNX en tiempo real.
 
-- **Portada profesional** con cards de problema/datos/objetivo
-- **Calidad de datos** (DAMA 100%)
-- **Análisis exploratorio** con selector interactivo de variables
-- **Treemap interactivo** de causas de deserción
-- **Matriz de confusión** del modelo
-- **Simulador en tiempo real** con ONNX (seleccionar estudiante + ajustar sliders → predicción instantánea)
-
-### Archivos a subir
-
-Los 13 archivos necesarios están en `proyecto_final/data/observable/`. Se suben como File Attachments en ObservableHQ.
+Los 14 archivos de `data/observable/` se suben como **File Attachments** en ObservableHQ.
 
 ---
 
-## Resultados principales
+## 📈 Resultados
 
 | Métrica | Valor |
 |---------|-------|
+| Total estudiantes | 4.424 |
 | Variables analizadas | 36 |
 | Tasa de deserción real | 32,4 % |
-| Calidad de datos (DAMA) | 100 % |
+| Calidad DAMA | 100 % (45 reglas) |
 | Deserciones por bajo rendimiento | 90,6 % |
+| **Random Forest — Recall** | **95,8 %** |
+| Random Forest — Accuracy | 94,1 % |
+| Random Forest — ROC-AUC | 0,9886 |
 
-El modelo **Random Forest** alcanzó un **Recall de 95,8 %** (detecta 275 de 287 deserciones reales). La **tasa de aprobación del primer año** es la variable más influyente (54,8 % de importancia).
-
----
-
-## Autor
-
-**Edilson Joel** — UNAJ, Ingeniería  
-Proyecto final de la materia Big Data y Ciencia de Datos — 2026
+La **tasa de aprobación del primer año** es la variable más influyente (54,8 % de importancia).
 
 ---
 
-> *Demo académica con datos del dataset UCI Student Dropout. No reemplaza el criterio institucional.*
+## 🧠 Modelos entrenados
+
+| Modelo | Recall |
+|--------|--------|
+| Baseline (siempre Estable) | 0 % |
+| Regresión Logística | 89,2 % |
+| Naive Bayes | 88,5 % |
+| **Random Forest (300 árboles)** | **95,8 %** ✅ |
+
+---
+
+## 📦 Requisitos
+
+- Python 3.10 – 3.13
+- pip
+- Git
+
+---
+
+## 👤 Autor
+
+**Edilson Joel** — UNAJ, Ingeniería — Big Data y Ciencia de Datos — 2026
+
+---
+
+> Demo académica con datos del dataset UCI Student Dropout. No reemplaza el criterio institucional.
