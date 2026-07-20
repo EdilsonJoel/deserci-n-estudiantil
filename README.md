@@ -1,7 +1,6 @@
 # ¿Podemos detectar a tiempo qué estudiante va a abandonar la universidad?
 
-**Predicción de deserción estudiantil** — Proyecto final de Big Data y Ciencia de Datos  
-Universidad Nacional Arturo Jauretche (UNAJ)
+**Predicción de deserción estudiantil** — Proyecto final de Big Data
 
 ---
 
