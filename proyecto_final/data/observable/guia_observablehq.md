@@ -101,12 +101,17 @@ predicciones_modelo = FileAttachment("predicciones_modelo.csv").csv({typed: true
 matriz_confusion = FileAttachment("matriz_confusion.csv").csv({typed: true})
 ```
 
-#### Celda S12 (JS — Archivo ONNX)
+#### Celda S12 (JS — Archivo metricas_modelos)
+```javascript
+metricas_modelos = FileAttachment("metricas_modelos.csv").csv({typed: true})
+```
+
+#### Celda S13 (JS — Archivo ONNX)
 ```javascript
 modelo_bytes = FileAttachment("modelo_final.onnx").arrayBuffer()
 ```
 
-#### Celda S13 (JS — Sesión ONNX)
+#### Celda S14 (JS — Sesión ONNX)
 ```javascript
 session = {
   ort.env.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.16.0/dist/";
@@ -114,7 +119,7 @@ session = {
 }
 ```
 
-#### Celda S14 (JS — Función predecir)
+#### Celda S15 (JS — Función predecir)
 ```javascript
 async function predecir(inputsArray) {
   const inputTensor = new ort.Tensor("float32", new Float32Array(inputsArray), [1, 9]);
@@ -129,12 +134,12 @@ async function predecir(inputsArray) {
 }
 ```
 
-#### Celda S15 (JS — Datos scatter para EDA)
+#### Celda S16 (JS — Datos scatter para EDA)
 ```javascript
 scatter_data = FileAttachment("eda_scatter.csv").csv({typed: true})
 ```
 
-#### Celda S16 (JS — Datos jerarquía para treemap)
+#### Celda S17 (JS — Datos jerarquía para treemap)
 ```javascript
 hierarchy_data = {
   const root = {name: "UNAJ", children: []};
@@ -536,7 +541,28 @@ treemapChart = {
 ```javascript
 html`<section style="max-width:1050px;font-family:system-ui,sans-serif">
   <h2 style="margin-top:28px">4. ¿Qué tan bien detecta el riesgo?</h2>
+  <p style="color:${theme.slate};font-size:15px;max-width:750px;margin-top:8px">
+    Entrenamos 4 modelos: <strong>Baseline</strong> (mayoritaria), <strong>Regresión Logística</strong>, 
+    <strong>Random Forest</strong> y <strong>Naive Bayes</strong>. El mejor fue <strong>Random Forest</strong> 
+    (Recall 95.8%), pero para el simulador web usamos <strong>Regresión Logística</strong> 
+    porque se exporta idéntica a ONNX.
+  </p>
 </section>`
+```
+
+#### Celda 14b (JS — Tabla de métricas)
+```javascript
+Inputs.table(metricas_modelos, {
+  columns: ["modelo", "accuracy", "precision", "recall", "f1", "roc_auc"],
+  header: {
+    modelo: "Modelo",
+    accuracy: "Accuracy",
+    precision: "Precision",
+    recall: "Recall",
+    f1: "F1-Score",
+    roc_auc: "ROC-AUC"
+  }
+})
 ```
 
 #### Celda 15 (JS — Heatmap matriz de confusión)
