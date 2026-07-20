@@ -266,7 +266,7 @@ def entrenar_y_evaluar(project_root):
             "mean": float(X[col].mean()),
             "median": float(X[col].median())
         }
-    with open(models_dir / "modelo_web_config.json", "w", encoding="utf-8") as f:
+    with open(observable_dir / "modelo_web_config.json", "w", encoding="utf-8") as f:
         json.dump(limites, f, indent=4)
         
     # Exportar metadatos generales

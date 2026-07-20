@@ -2,6 +2,7 @@
 !*/
 !.gitignore
 !README.md
+!guia_presentacion_12min.md
 !/proyecto_final/**
 !/proyecto_final/
 
@@ -26,6 +27,9 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Python-generated figures (rubric: no final graphs in Python)
+proyecto_final/reports/figures/*.png
 
 # Archivos temporales / scripts auxiliares
 scratch/

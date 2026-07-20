@@ -17,7 +17,7 @@ Este proyecto explora si los datos del primer año —notas, situación financie
 ```
 proyecto_final/
 ├── data/
-│   ├── raw/                  # Datos originales (UCI Student Dropout)
+│   ├── raw/                  # Datos originales (student_dropout.csv)
 │   ├── processed/            # Datos limpios y preparados
 │   └── observable/           # Archivos para el dashboard ObservableHQ
 │       ├── *.csv             # Datos de EDA, calidad, métricas
@@ -27,11 +27,11 @@ proyecto_final/
 ├── notebooks/
 │   └── 01_desercion_estudiantil.ipynb  # Notebook principal
 ├── src/
-│   ├── pipeline.py           # Orquestación del pipeline
+│   ├── pipeline.py           # Orquestación del pipeline completo
 │   ├── calidad.py            # Validación de calidad DAMA
 │   ├── preparacion.py        # Limpieza e ingeniería de features
-│   └── modelado.py           # Entrenamiento y exportación ONNX
-├── reports/figures/          # Gráficos generados
+│   └── modelado.py           # Entrenamiento, evaluación, exportación ONNX
+├── reports/figures/          # (opcional — los gráficos finales van en Observable)
 └── requirements.txt          # Dependencias Python
 ```
 

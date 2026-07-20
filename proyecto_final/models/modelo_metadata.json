@@ -1,5 +1,5 @@
 {
-    "fecha_entrenamiento": "2026-07-19 20:18:31",
+    "fecha_entrenamiento": "2026-07-20 08:19:51",
     "mejor_modelo": "Random Forest",
     "f1_score": 0.9136,
     "total_filas_dataset": 4424,

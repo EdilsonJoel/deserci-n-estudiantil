@@ -1,2 +1,2 @@
 fecha_entrenamiento,mejor_modelo,f1_score,total_filas_dataset,variables_entrada
-2026-07-19 20:18:31,Random Forest,0.9136,4424,"['tipo_codigo', 'Age at enrollment', 'Gender', 'Scholarship holder', 'Debtor', 'Tuition fees up to date', 'tasa_aprobacion_ano', 'diferencia_calificaciones', 'estabilidad_financiera']"
+2026-07-20 08:19:51,Random Forest,0.9136,4424,"['tipo_codigo', 'Age at enrollment', 'Gender', 'Scholarship holder', 'Debtor', 'Tuition fees up to date', 'tasa_aprobacion_ano', 'diferencia_calificaciones', 'estabilidad_financiera']"
