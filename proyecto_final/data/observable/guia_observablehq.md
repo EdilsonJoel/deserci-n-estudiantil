@@ -406,12 +406,18 @@ Plot.plot({
 ```javascript
 Plot.plot({
   title: "Edad vs Tasa de Aprobación — ¿Dónde se concentra la deserción?",
-  subtitle: "Cada hexágono agrupa múltiples estudiantes. Color = proporción de deserción en esa zona.",
-  x: {label: "Edad al matricularse", tickFormat: d => d},
+  subtitle: "Cada punto es un estudiante. Transparencia alta revela la densidad de cada grupo.",
+  x: {label: "Edad al matricularse"},
   y: {label: "Tasa de aprobación anual", domain: [0, 1]},
   color: {legend: true, domain: [0, 1], range: [theme.blue, theme.red], tickFormat: d => d === 0 ? "Estable (0)" : "Deserción (1)"},
   marks: [
-    Plot.hexbin(scatter_data, {x: "Age at enrollment", y: "tasa_aprobacion_ano", fill: "Machine failure", reduce: "mean", thresholds: 80, tip: true}),
+    Plot.dot(scatter_data, {
+      x: "Age at enrollment",
+      y: "tasa_aprobacion_ano",
+      fill: "Machine failure",
+      r: 2,
+      opacity: 0.25
+    }),
     Plot.ruleY([0])
   ]
 })
