@@ -480,13 +480,16 @@ treemapChart = {
     .attr("opacity", 0.08)
     .attr("rx", 6);
 
-  group.append("text")
-    .attr("x", 8)
-    .attr("y", 16)
-    .attr("font-size", 12)
-    .attr("font-weight", "700")
-    .attr("fill", d => colorMotivo(d.data.name))
-    .text(d => d.data.name);
+  group.each(function(d) {
+    const g = d3.select(this);
+    const gw = d.x1 - d.x0;
+    const name = d.data.name;
+    if (gw > 80) {
+      g.append("text").attr("x", 8).attr("y", 16).attr("font-size", 12).attr("font-weight", "700").attr("fill", colorMotivo(d.data.name)).text(name);
+    } else {
+      g.append("text").attr("x", gw / 2).attr("y", 16).attr("font-size", 10).attr("font-weight", "700").attr("fill", colorMotivo(d.data.name)).attr("text-anchor", "middle").text(name.length > 12 ? name.slice(0, 12) + "…" : name);
+    }
+  });
 
   const leaf = svg.selectAll("g.leaf")
     .data(root.leaves())
@@ -508,30 +511,18 @@ treemapChart = {
   leaf.append("title")
     .text(d => `${d.parent.data.name} — ${d.data.name}\n${d.value.toLocaleString()} alumnos (${(d.value / total * 100).toFixed(1)}%)`);
 
-  leaf.append("text")
-    .attr("x", 6)
-    .attr("y", 16)
-    .attr("font-size", 11)
-    .attr("font-weight", "700")
-    .attr("fill", "white")
-    .attr("pointer-events", "none")
-    .text(d => (d.x1 - d.x0 > 60 && d.y1 - d.y0 > 24) ? d.data.name : "");
-
-  leaf.append("text")
-    .attr("x", 6)
-    .attr("y", 30)
-    .attr("font-size", 10)
-    .attr("fill", "rgba(255,255,255,0.9)")
-    .attr("pointer-events", "none")
-    .text(d => (d.x1 - d.x0 > 60 && d.y1 - d.y0 > 38) ? `${d.value.toLocaleString()} alumnos` : "");
-
-  leaf.append("text")
-    .attr("x", 6)
-    .attr("y", 42)
-    .attr("font-size", 9)
-    .attr("fill", "rgba(255,255,255,0.7)")
-    .attr("pointer-events", "none")
-    .text(d => (d.x1 - d.x0 > 60 && d.y1 - d.y0 > 52) ? `${(d.value / total * 100).toFixed(1)}% del total` : "");
+  leaf.each(function(d) {
+    const g = d3.select(this);
+    const w = d.x1 - d.x0;
+    const h = d.y1 - d.y0;
+    if (w > 50 && h > 18) {
+      g.append("text").attr("x", 6).attr("y", 16).attr("font-size", 11).attr("font-weight", "700").attr("fill", "white").attr("pointer-events", "none").text(d.data.name);
+      if (h > 30) g.append("text").attr("x", 6).attr("y", 30).attr("font-size", 10).attr("fill", "rgba(255,255,255,0.9)").attr("pointer-events", "none").text(`${d.value.toLocaleString()} alumnos`);
+      if (h > 42) g.append("text").attr("x", 6).attr("y", 42).attr("font-size", 9).attr("fill", "rgba(255,255,255,0.7)").attr("pointer-events", "none").text(`${(d.value / total * 100).toFixed(1)}%`);
+    } else if (w > 25 && h > 35) {
+      g.append("text").attr("x", w / 2).attr("y", 4).attr("font-size", 10).attr("font-weight", "700").attr("fill", "white").attr("text-anchor", "middle").attr("pointer-events", "none").attr("style", "writing-mode: vertical-rl").text(d.data.name);
+    }
+  });
 
   return svg.node();
 }
